@@ -1,3 +1,7 @@
+runtest.sh
+testdata
+slicer
+
 # Prerequisites
 *.d
 
