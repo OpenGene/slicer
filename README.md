@@ -13,18 +13,6 @@ slicer -i <input_file_name> -l <how_many_lines_per_slice> -o <output_dir>
 slicer -i <input_file_name> -l <how_many_lines_per_slice> -o <output_dir> --gzip
 ```
 
-# Download
-Get latest
-```shell
-# download by http
-https://github.com/OpenGene/slicer/archive/master.zip
-
-# or clone by git
-git clone https://github.com/OpenGene/slicer.git
-```
-Get the stable releases  
-https://github.com/OpenGene/slicer/releases/latest
-
 # Example
 Assuming that you have a text file called `filename.for.test.data` with 400000 lines, you want to cut it to 4 slices (100000 lines for each). You'd like to gzip all the slices, keep the file extension `.data`, and store them in a folder `sliced`. You can use following command:
 ```
@@ -39,14 +27,27 @@ sliced
 └── 0004.data.gz
 ```
 
-# Build
+# Get slicer
+## Download
+Get latest
+```shell
+# download by http
+https://github.com/OpenGene/slicer/archive/master.zip
+
+# or clone by git
+git clone https://github.com/OpenGene/slicer.git
+```
+Get the stable releases  
+https://github.com/OpenGene/slicer/releases/latest
+
+## Build
 slicer only depends on `libz`, which is always available on Linux or Mac systems. If your system has no `libz`, install it first.
 ```shell
 cd slicer
 make
 ```
 
-# Install
+## Install
 After build is done, run
 ```
 sudo make install
