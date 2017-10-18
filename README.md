@@ -56,16 +56,17 @@ sudo make install
 
 # Full options
 ```
-usage: slicer --input=string --line=int [options] ... 
+usage: ./slicer --input=string --line=int [options] ... 
 options:
   -i, --input          input file name (string)
   -o, --outdir         the output folder, default is currently working directory (string [=.])
   -l, --line           how many lines per slice (int)
-  -d, --digits         the digits for the slice number padding, default is 4, so the filename will be padded as 0001.xxx, -1 to disable padding (int [=4])
-  -e, --ext            the file extension to be added to the output if using simple_name) (string [=])
+  -d, --digits         the digits for the slice number padding (1~10), default is 4, so the filename will be padded as 0001.xxx, 0 to disable padding (int [=4])
   -z, --gzip           force gzip output, default the gzip setting is following the input
   -n, --nogzip         don't use gzip output, default the gzip setting is following the input
+  -c, --compression    the gzip compression level (0 ~ 9), 0 for best speed, 9 for best compression ratio, default is 2 (int [=2])
   -s, --simple_name    use the simple file name like 0001, and discard the original file name
+  -e, --ext            set the file extension to be added to the output if using simple_name. This option only works when --simple_name enabled (string [=])
   -?, --help           print this message
 ```
 
