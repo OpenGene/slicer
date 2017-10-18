@@ -5,7 +5,7 @@
 #include "util.h"
 #include <sstream>
 
-#define VERSION "0.1.0"
+#define VERSION "0.2.0"
 
 int main(int argc, char* argv[]){
     cmdline::parser cmd;
