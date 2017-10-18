@@ -5,6 +5,8 @@
 #include "util.h"
 #include <sstream>
 
+#define VERSION "0.1.0"
+
 int main(int argc, char* argv[]){
     cmdline::parser cmd;
     cmd.add<string>("input", 'i', "input file name", true, "");
@@ -28,7 +30,7 @@ int main(int argc, char* argv[]){
     bool nogzip = cmd.exist("nogzip");
 
     if(gzip && nogzip) {
-        printf("ERROR: you cannot set the output to be both gzip and nogzip, choose either to run again.\n");
+        cout << "ERROR: you cannot set the output to be both gzip and nogzip, choose either to run again." << endl;
         exit(-1);
     }
 
@@ -42,11 +44,25 @@ int main(int argc, char* argv[]){
 
     check_file_valid(infile);
 
+    if(file_exists(outfolder) && !is_directory(outfolder)) {
+        cout << "ERROR: " << outfolder << " exists but is not a folder." << endl ;
+        exit(-1);
+    }
+
+    // create the output folder if it doesn't exist
+    if(!file_exists(outfolder)) {
+        mkdir(outfolder.c_str(), 0777);
+        if(!file_exists(outfolder)) {
+            cout << "ERROR: " << outfolder << " doesn't exist and cannot be created." << endl ;
+            exit(-1);
+        }
+    }
+
     time_t t1 = time(NULL);
     Slicer slicer(infile, outfolder, sliceLines, extension, sliceDigits, gzipSetting, keepOriginalFilename);
     slicer.run();
     time_t t2 = time(NULL);
-    cout << slicer.getTotalLines() << " lines cut to " << slicer.getTotalSlices() << " slices in " << t2 -t1 << " seconds" << endl;
+    cout << slicer.getTotalLines() << " lines cut to " << slicer.getTotalSlices() << " slices in " << t2 -t1 << " seconds, by slicer v" << VERSION << endl;
 
 
     return 0;

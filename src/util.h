@@ -117,7 +117,9 @@ inline string int2str(int num){
     char str[20];
     sprintf(str,"%d",num);
     return string(str);
-}//Check if a string is a file or directory
+}
+
+//Check if a string is a file or directory
 inline bool file_exists(const  string& s)
 {
     bool exists = false;
