@@ -1,5 +1,5 @@
 # Slicer
-Slice a text file to smaller files by lines. This tool also supports gzip compression for input/output.
+Slice a text file to smaller files by lines, with gzip compression for input/output supported. This tool can be used to slice big `FASTQ` files to smaller ones for parallel processing.
 
 # Usage
 ```shell
@@ -20,11 +20,12 @@ slicer -i filename.for.test.data -l 100000 -o sliced -e data -z -s
 ```
 Then you will get four files in the folder `sliced`:
 ```
-sliced
-├── 0001.data.gz
-├── 0002.data.gz
-├── 0003.data.gz
-└── 0004.data.gz
+├── filename.for.test.data
+└── sliced
+    ├── 0001.data.gz
+    ├── 0002.data.gz
+    ├── 0003.data.gz
+    └── 0004.data.gz
 ```
 
 # Get slicer
