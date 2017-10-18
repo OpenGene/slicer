@@ -12,7 +12,7 @@ int main(int argc, char* argv[]){
     cmd.add<string>("input", 'i', "input file name", true, "");
     cmd.add<string>("outdir", 'o', "the output folder, default is currently working directory", false, ".");
     cmd.add<int>("line", 'l', "how many lines per slice", true, 0);
-    cmd.add<int>("digits", 'd', "the digits for the slice number padding, default is 4, so the filename will be padded as 0001.xxx, -1 to disable padding", false, 4);
+    cmd.add<int>("digits", 'd', "the digits for the slice number padding (1~10), default is 4, so the filename will be padded as 0001.xxx, 0 to disable padding", false, 4);
     cmd.add<string>("ext", 'e', "the file extension to be added to the output if using simple_name)", false, "");
     cmd.add("gzip", 'z', "force gzip output, default the gzip setting is following the input");
     cmd.add("nogzip", 'n', "don't use gzip output, default the gzip setting is following the input");
@@ -25,6 +25,8 @@ int main(int argc, char* argv[]){
 
     int sliceLines = cmd.get<int>("line");
     int sliceDigits = cmd.get<int>("digits");
+    if(sliceDigits > 10)
+        sliceDigits = 10;
 
     bool gzip = cmd.exist("gzip");
     bool nogzip = cmd.exist("nogzip");

@@ -67,8 +67,10 @@ void Slicer::run(){
 void Slicer::prepareOutput(int sliceNumber){
     string num = int2str(sliceNumber);
     // padding
-    while(num.size() < mSliceNoDigits)
-        num = "0" + num;
+    if(mSliceNoDigits > 0){
+        while(num.size() < mSliceNoDigits)
+            num = "0" + num;
+    }
 
     string outFile = joinpath(mOutFolder, num);
     if(mKeepOriginalFilename) {
