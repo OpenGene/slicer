@@ -17,6 +17,7 @@ slicer -i <input_file_name> -l <how_many_lines_per_slice> -o <output_dir> --gzip
 Assuming that you have a text file called `filename.for.test.data` with 400000 lines, you want to cut it to 4 slices (100000 lines for each). You'd like to gzip all the slices, keep the file extension `.data`, and store them in a folder `sliced`. You can use following command:
 ```
 slicer -i filename.for.test.data -l 100000 -o sliced -e data -z -s
+# split -l 100000 filename.for.test.data
 ```
 Then you will get four files in the folder `sliced`:
 ```
