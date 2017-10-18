@@ -3,7 +3,7 @@
 #include "util.h"
 #include <memory.h>
 
-Slicer::Slicer(string infile, string outfolder, int sliceLines, string extension, int sliceNoDigits, int gzipSetting, bool keepOriginalFilename) {
+Slicer::Slicer(string infile, string outfolder, int sliceLines, string extension, int sliceNoDigits, int gzipSetting, bool keepOriginalFilename, int compression) {
     mInFile = infile;
     mOutFolder = outfolder;
     mExtension = extension;
@@ -12,6 +12,7 @@ Slicer::Slicer(string infile, string outfolder, int sliceLines, string extension
     mKeepOriginalFilename = keepOriginalFilename;
     mTotalLine = 0;
     mTotalSlice = 0;
+    mCompression = compression;
 
     // gzip handlling
     if(ends_with(infile, ".gz"))
@@ -84,6 +85,7 @@ void Slicer::prepareOutput(int sliceNumber){
         if(!ends_with(outFile, ".gz"))
             outFile = outFile + ".gz";
         mOutZip = gzopen(outFile.c_str(), "w");
+        gzsetparams(mOutZip, mCompression, Z_DEFAULT_STRATEGY);
     } else {
         if(ends_with(outFile, ".gz"))
             outFile = outFile.substr(0, outFile.size() - 3);

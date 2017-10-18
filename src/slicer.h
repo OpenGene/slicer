@@ -15,7 +15,7 @@ using namespace std;
 
 class Slicer{
 public:
-    Slicer(string infile, string outfolder, int sliceLines, string extension = "", int sliceNoDigits = 4, int gzipSetting = GZIP_AS_INPUT, bool keepOriginalFilename = true);
+    Slicer(string infile, string outfolder, int sliceLines, string extension = "", int sliceNoDigits = 4, int gzipSetting = GZIP_AS_INPUT, bool keepOriginalFilename = true, int compression=2);
     ~Slicer();
     void run();
     int getTotalLines() { return mTotalLine; }
@@ -44,6 +44,7 @@ private:
     bool mKeepOriginalFilename;
     int mTotalLine;
     int mTotalSlice;
+    int mCompression;
 };
 
 #endif

@@ -15,6 +15,7 @@ int main(int argc, char* argv[]){
     cmd.add<int>("digits", 'd', "the digits for the slice number padding (1~10), default is 4, so the filename will be padded as 0001.xxx, 0 to disable padding", false, 4);
     cmd.add("gzip", 'z', "force gzip output, default the gzip setting is following the input");
     cmd.add("nogzip", 'n', "don't use gzip output, default the gzip setting is following the input");
+    cmd.add<int>("compression", 'c', "the gzip compression level (0 ~ 9), 0 for best speed, 9 for best compression ratio, default is 2", false, 2);
     cmd.add("simple_name", 's', "use the simple file name like 0001, and discard the original file name");
     cmd.add<string>("ext", 'e', "set the file extension to be added to the output if using simple_name. This option only works when --simple_name enabled", false, "");
     cmd.parse_check(argc, argv);
@@ -27,6 +28,9 @@ int main(int argc, char* argv[]){
     int sliceDigits = cmd.get<int>("digits");
     if(sliceDigits > 10)
         sliceDigits = 10;
+
+    int compression = cmd.get<int>("compression");
+    compression = max(min(9, compression), 0);
 
     bool gzip = cmd.exist("gzip");
     bool nogzip = cmd.exist("nogzip");
@@ -61,7 +65,7 @@ int main(int argc, char* argv[]){
     }
 
     time_t t1 = time(NULL);
-    Slicer slicer(infile, outfolder, sliceLines, extension, sliceDigits, gzipSetting, keepOriginalFilename);
+    Slicer slicer(infile, outfolder, sliceLines, extension, sliceDigits, gzipSetting, keepOriginalFilename, compression);
     slicer.run();
     time_t t2 = time(NULL);
     cout << slicer.getTotalLines() << " lines cut to " << slicer.getTotalSlices() << " slices in " << t2 -t1 << " seconds, by slicer v" << VERSION << endl;
