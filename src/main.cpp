@@ -13,10 +13,10 @@ int main(int argc, char* argv[]){
     cmd.add<string>("outdir", 'o', "the output folder, default is currently working directory", false, ".");
     cmd.add<int>("line", 'l', "how many lines per slice", true, 0);
     cmd.add<int>("digits", 'd', "the digits for the slice number padding (1~10), default is 4, so the filename will be padded as 0001.xxx, 0 to disable padding", false, 4);
-    cmd.add<string>("ext", 'e', "the file extension to be added to the output if using simple_name)", false, "");
     cmd.add("gzip", 'z', "force gzip output, default the gzip setting is following the input");
     cmd.add("nogzip", 'n', "don't use gzip output, default the gzip setting is following the input");
     cmd.add("simple_name", 's', "use the simple file name like 0001, and discard the original file name");
+    cmd.add<string>("ext", 'e', "set the file extension to be added to the output if using simple_name. This option only works when --simple_name enabled", false, "");
     cmd.parse_check(argc, argv);
 
     string infile = cmd.get<string>("input");
