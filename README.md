@@ -3,16 +3,23 @@ Slice a text file to smaller files by lines. This tool also supports gzip compre
 
 # Usage
 ```shell
+# simplest
 slicer -i <input_file_name> -l <how_many_lines_per_slice>
+
+# specify a folder to store the slicedfiles
+slicer -i <input_file_name> -l <how_many_lines_per_slice> -o <output_dir>
+
+# force gzip
+slicer -i <input_file_name> -l <how_many_lines_per_slice> -o <output_dir> --gzip
 ```
 
 # Download
-Get latest (may be not stable)
+Get latest
 ```shell
-# download use http
+# download by http
 https://github.com/OpenGene/slicer/archive/master.zip
 
-# or download use git
+# or clone by git
 git clone https://github.com/OpenGene/slicer.git
 ```
 Get the stable releases  
