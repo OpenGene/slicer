@@ -6,7 +6,7 @@ Slice a text file to smaller files by lines. This tool also supports gzip compre
 # simplest
 slicer -i <input_file_name> -l <how_many_lines_per_slice>
 
-# specify a folder to store the slicedfiles
+# specify a folder to store the sliced files
 slicer -i <input_file_name> -l <how_many_lines_per_slice> -o <output_dir>
 
 # force gzip
@@ -24,6 +24,20 @@ git clone https://github.com/OpenGene/slicer.git
 ```
 Get the stable releases  
 https://github.com/OpenGene/slicer/releases/latest
+
+# Example
+Assuming that you have a text file called `filename.for.test.data` with 400000 lines, you want to cut it to 4 slices (100000 lines for each). You'd like to gzip all the slices, keep the file extension `.data`, and store them in a folder `sliced`. You can use following command:
+```
+slicer -i filename.for.test.data -l 100000 -o sliced -e data -z -s
+```
+Then you will get four files in the folder `sliced`:
+```
+sliced
+├── 0001.data.gz
+├── 0002.data.gz
+├── 0003.data.gz
+└── 0004.data.gz
+```
 
 # Build
 slicer only depends on `libz`, which is always available on Linux or Mac systems. If your system has no `libz`, install it first.
